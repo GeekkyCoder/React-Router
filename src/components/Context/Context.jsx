@@ -6,6 +6,7 @@ const {Provider,Consumer} = createContext()
 function ContextProvider(props){
   
     const [cartItems,setCartItems] = useState([])
+    const [products,setProducts] = useState(productItems)
 
 
       const removeFromCart = (e,id) => {
@@ -18,12 +19,11 @@ function ContextProvider(props){
 
 
       const addToCart = (e,id) => {
-        const item = productItems.find(item => item.id === id)
-       setCartItems((prevItem => {
-        return [...prevItem, item]
-       }))
+        const itemToAdd = products.find(item => item.id === id)
+        setCartItems(prevItems => {
+           return [...prevItems,itemToAdd]
+        })
       }
-//    console.log(cartItems.map(item => (item)))
 
 console.log(cartItems)
 
@@ -31,9 +31,10 @@ console.log(cartItems)
         <Provider value={{
             cartItems,
             setCartItems,
-            productItems,
             removeFromCart,
-            addToCart
+            addToCart,
+            products,
+            setProducts
         }}>
           {props.children}
         </Provider>

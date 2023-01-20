@@ -63,3 +63,24 @@ body{
     margin: 1em 0;
 }
 
+.product-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4em auto;
+    background-color: rgb(249 250 251);
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    width: 80%;
+}
+
+
+.product-item .img{
+  width:45%;
+  height: 300px;
+}
+
+.product-item .info {
+    max-width: 50%;
+    margin-left: 1em;
+}
+

@@ -8,12 +8,12 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import Button from "@mui/material/Button";
-import { Consumer } from "./Context/useContext";
+import { Consumer } from "./Context/Context";
 
 export default function Product() {
 
   const {
-    productItems,
+    products,
     addToCart,
     
   } = useContext(Consumer);
@@ -26,7 +26,7 @@ export default function Product() {
     <div>
       <h1 style={{ textAlign: "center" }}>Products</h1>
       <div data-aos="fade-up" className="product">
-        {productItems.map((prod) => (
+        {products.map((prod) => (
           <Card key={++id} className="card" sx={{ maxWidth: 345 }}>
             <CardHeader
               avatar={

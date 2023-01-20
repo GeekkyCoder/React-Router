@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Consumer } from "./Context/useContext";
+import { Consumer } from "./Context/Context";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
