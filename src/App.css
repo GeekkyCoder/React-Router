@@ -1,0 +1,65 @@
+
+body{
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+.nav {
+    width: 80%;
+    margin: 0 auto;
+    border: 2px solid grey;
+}
+
+.nav ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.nav ul li {
+    list-style: none;
+    
+}
+
+.nav ul li a{
+    color: grey;
+    text-decoration: none;
+}
+
+.product,
+.sidebar,
+.header,
+.homepage {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 2em auto;
+}
+
+.product {
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product .card {
+    width: 30%;
+    margin-bottom: 2em;
+}
+
+.homepage{
+    display: flex;
+    flex-direction: column;
+}
+
+.homepage h2 {
+    margin: 1em 0;
+}
+
