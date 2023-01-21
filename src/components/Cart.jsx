@@ -14,14 +14,18 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import DeleteIcon from "@mui/icons-material/Delete";
 
 function Cart() {
-  const { cartItems, removeFromCart } = useContext(Context);
+  const {
+    cartItems,
+    removeFromCart,
+    isDelHovered,
+    handleDelMouseEnter,
+    handleDelMouseLeave,
+    delRef,
+    handleButtonHover,
+    buttonHovered
+  } = useContext(Context);
 
   let id = 0;
-
-  useEffect(() => {
-    Aos.init({ duration: 1000 });
-    Aos.refresh();
-  }, [cartItems]);
 
   return (
     <div>
@@ -56,14 +60,30 @@ function Cart() {
                 </CardContent>
                 <CardActions>
                   <Button
+                  onMouseEnter={handleButtonHover}
+                    // onMouseEnter={handleDelMouseEnter}
+                    // omMouseLeave={handleDelMouseLeave}
+            
                     onClick={(e) => removeFromCart(e, item.id)}
                     sx={{ marginLeft: "auto" }}
                     variant="contained"
                     color="error"
                   >
-                    <DeleteOutlineOutlinedIcon
-                      onClick={(e) => removeFromCart(e, item.id)}
-                    />
+                    <div  >
+                    {!isDelHovered ? (
+                    
+                      <DeleteOutlineOutlinedIcon
+                      ref={delRef}
+                        onClick={(e) => removeFromCart(e, item.id)}
+                      />
+                    ) : (
+                      <DeleteIcon
+                      // ref={delRef}
+               
+                        onClick={(e) => removeFromCart(e, item.id)}
+                      />
+                      )}
+                      </div>
                   </Button>
                 </CardActions>
               </Card>
