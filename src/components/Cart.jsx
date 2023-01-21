@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Consumer } from "./Context/Context";
+import React, { useContext, useEffect } from "react";
+import { Context } from "./Context/Context";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -9,25 +9,28 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import Button from "@mui/material/Button";
-
+import Aos from "aos";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 function Cart() {
-  const {
-    cartItems,
-    removeFromCart,
-  } = useContext(Consumer);
+  const { cartItems, removeFromCart } = useContext(Context);
 
   let id = 0;
 
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+    Aos.refresh();
+  }, [cartItems]);
 
   return (
     <div>
       {cartItems.length > 0 ? (
         <div>
-          <h1 style={{ textAlign: "center" }}>Cart Items</h1>
-          <div data-aos="slide-right" className="product">
+          <h1 data-aos="slide-down" style={{ textAlign: "center" }}>
+            Cart Items
+          </h1>
+          <div data-aos="fade-up" className="product">
             {cartItems.map((item) => (
               <Card key={++id} className="card" sx={{ maxWidth: 345 }}>
                 <CardHeader
@@ -53,12 +56,14 @@ function Cart() {
                 </CardContent>
                 <CardActions>
                   <Button
-                  
+                    onClick={(e) => removeFromCart(e, item.id)}
                     sx={{ marginLeft: "auto" }}
                     variant="contained"
                     color="error"
                   >
-                    <DeleteOutlineOutlinedIcon   onClick={(e) => removeFromCart(e, item.id)}/>
+                    <DeleteOutlineOutlinedIcon
+                      onClick={(e) => removeFromCart(e, item.id)}
+                    />
                   </Button>
                 </CardActions>
               </Card>

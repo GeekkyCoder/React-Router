@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Typography } from "@mui/material";
-import { Consumer } from "./Context/Context";
+import { Context } from "./Context/Context";
 
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 function Navigation() {
-  const { cartItems, productItems } = useContext(Consumer);
+  const { cartItems, isItemsAdded } = useContext(Context);
 
   return (
     <div className="nav">
@@ -23,11 +24,18 @@ function Navigation() {
         <li>
           <NavLink to="/sidebar">Sidebar</NavLink>
         </li>
-
         <li>
-          <Typography>{cartItems.length}</Typography>
+          {cartItems.length > 0 && (
+            <Typography data-aos="flip-up" sx={{ color: "rgb(99 102 241)" }}>
+              {cartItems.length}
+            </Typography>
+          )}
           <NavLink to="/cart">
-            <AddShoppingCartIcon htmlColor="black" />
+            {!cartItems.length ? (
+              <AddShoppingCartIcon htmlColor="black" />
+            ) : (
+              <ShoppingCartIcon htmlColor="black" />
+            )}
           </NavLink>
         </li>
       </ul>

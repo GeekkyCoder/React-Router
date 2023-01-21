@@ -8,7 +8,7 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import Button from "@mui/material/Button";
-import { Consumer } from "./Context/Context";
+import { Context } from "./Context/Context";
 
 export default function Product() {
 
@@ -16,7 +16,7 @@ export default function Product() {
     products,
     addToCart,
     
-  } = useContext(Consumer);
+  } = useContext(Context);
 
 
 

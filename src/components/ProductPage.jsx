@@ -2,10 +2,10 @@
 import { useParams } from "react-router-dom";
 import React, { useContext } from "react";
 
-import { Consumer } from "./Context/Context";
+import { Context } from "./Context/Context";
 
 function ProductPage() {
-  const { products } = useContext(Consumer);
+  const { products } = useContext(Context);
   const { id } = useParams();
   const product = products.find((item) => item.id === Number(id));
 
