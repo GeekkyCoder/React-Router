@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { Context } from "./Context/Context";
+import {Outlet } from "react-router-dom"
 
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -10,6 +11,7 @@ function Navigation() {
   const { cartItems, isItemsAdded } = useContext(Context);
 
   return (
+    <div>
     <div className="nav">
       <ul>
         <li>
@@ -39,6 +41,8 @@ function Navigation() {
           </NavLink>
         </li>
       </ul>
+    </div>
+      <Outlet/>
     </div>
   );
 }
