@@ -48,10 +48,10 @@ function ContextProvider(props){
           delRef.current.addEventListener("onmouseenter", handleDelMouseEnter)
           delRef.current.addEventListener("onmouseleave",  handleDelMouseLeave)
 
-          return () => {
-            delRef.current.removeEventListener("onmouseenter", handleDelMouseEnter)
-            delRef.current.removeEventListener("onmouseleave", handleDelMouseEnter)
-          }
+          // return () => {
+          //   delRef.current.removeEventListener("onmouseenter", handleDelMouseEnter)
+          //   delRef.current.removeEventListener("onmouseleave", handleDelMouseEnter)
+          // }
         }
   
       },[buttonHovered])
