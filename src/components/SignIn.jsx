@@ -1,0 +1,85 @@
+import React, { useState } from "react";
+
+import {
+  createUserDocumentFromAuth,
+  signInAuthUserWithEmailAndPassword,
+  signInWithGooglePopUp,
+} from "../utils/firebase/utils";
+
+const formFieldsObject = {
+  email: "",
+  password: "",
+};
+
+function SignIn() {
+  const [formFields, setFormFields] = useState(formFieldsObject);
+  const [isPasswordMatched, setIsPasswordMatched] = useState();
+  const { email, password } = formFields;
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormFields((prevFormFields) => {
+      return {
+        ...prevFormFields,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+        const response  = await signInAuthUserWithEmailAndPassword(email,password)
+        console.log(response)
+    } catch (err) {
+       if(err.message==="auth/wrong-password"){
+        alert('wrong password')
+       }else {
+        console.log(err)
+       }
+    }
+  };
+
+  const logUserWithGoogle = async () => {
+    const { user } = await signInWithGooglePopUp();
+    await createUserDocumentFromAuth(user);
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleFormSubmit} className="form">
+        <span style={{ textTransform: "uppercase" }}>
+          Already have an account ?
+        </span>
+        <div className="form-item">
+          <label>Email:</label>
+          <input
+            type="email"
+            placeholder="enter your email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-item">
+          <label>Password:</label>
+          <input
+            type="password"
+            placeholder="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+          />
+        </div>
+
+        <button type="submit">Sign in</button>
+        <button style={{ marginTop: "2em" }} onClick={logUserWithGoogle}>
+          Google Sign in
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export default SignIn;

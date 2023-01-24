@@ -42,7 +42,9 @@ function SignUp() {
      await createUserDocumentFromAuth(user, {displayName})
 
     }catch(err){
-        console.log(err.message)
+        if(err.code === "auth/email-already-in-use"){
+            alert("email already in use")
+        }
     }
     
   };
@@ -50,6 +52,7 @@ function SignUp() {
   return (
     <div>
       <form onSubmit={handleFormSubmit} className="form">
+      <span style={{textTransform:"uppercase"}}>dont have an account ?</span>
         <div className="form-item">
           <label>DisplayName:</label>
           <input

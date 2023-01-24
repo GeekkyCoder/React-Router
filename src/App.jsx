@@ -12,6 +12,7 @@ import Aos from "aos";
 import Cart from "./components/Cart";
 import SubHeader from "./components/SubHeader";
 import SignUp from "./components/SignUp";
+import Auth from "./components/Authentication/Auth";
 
 function App() {
   useEffect(() => {
@@ -28,7 +29,7 @@ function App() {
           <Route path="/home/sub1" element={<SubHome />}></Route>
           <Route path="/product/:id" element={<ProductPage />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
-          <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/auth" element={<Auth />}></Route>
         </Route>
       </Routes>
     </div>

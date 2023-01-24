@@ -121,3 +121,9 @@ button{
 button:hover{
     cursor: pointer;
 }
+
+.auth-container{
+    display: flex;
+    justify-content: space-evenly;
+
+}

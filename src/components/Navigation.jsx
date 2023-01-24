@@ -65,7 +65,7 @@ function Navigation() {
             </NavLink>
           </li>
           <li>
-           <NavLink to={"/signup"}>Sign up</NavLink>
+           <NavLink to={"/auth"}>Sign up</NavLink>
           </li>
         </ul>
       </div>
