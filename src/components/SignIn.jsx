@@ -84,7 +84,7 @@ function SignIn() {
         </div>
 
         <button type="submit">Sign in</button>
-        <button style={{ marginTop: "2em" }} onClick={logUserWithGoogle}>
+        <button type="button" style={{ marginTop: "2em" }} onClick={logUserWithGoogle}>
           Google Sign in
         </button>
       </form>
