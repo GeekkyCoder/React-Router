@@ -10,6 +10,7 @@ function ContextProvider(props){
     const [isItemsAdded,setIsItemsAdded] = useState(false)
     const [isDelHovered,setIsDelHovered] = useState(false)
     const [buttonHovered,setButtonHovered] = useState(false)
+    const [currentUser,setCurrentUser] = useState(null)
    const delRef = useRef()
 
       const removeFromCart = (e,id) => {
@@ -70,7 +71,9 @@ function ContextProvider(props){
             isDelHovered,
             delRef,
             handleButtonHover,
-            buttonHovered
+            buttonHovered,
+            currentUser,
+            setCurrentUser
         }}>
           {props.children}
         </Context.Provider>

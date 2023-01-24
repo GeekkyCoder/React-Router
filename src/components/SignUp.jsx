@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
-import { createAuthUserWithEmailAndPassword,auth,createUserDocumentFromAuth } from "../utils/firebase/utils";
-
+import {
+  createAuthUserWithEmailAndPassword,
+  auth,
+  createUserDocumentFromAuth,
+} from "../utils/firebase/utils";
+import { Context } from "./Context/Context";
 
 const formFieldsObject = {
   displayName: "",
@@ -11,6 +15,8 @@ const formFieldsObject = {
 };
 
 function SignUp() {
+  const { setCurrentUser } = useContext(Context);
+
   const [formFields, setFormFields] = useState(formFieldsObject);
   const [isPasswordMatched, setIsPasswordMatched] = useState();
   const { displayName, email, password, confirmPassword } = formFields;
@@ -29,30 +35,33 @@ function SignUp() {
     return password === confirmPassword ? true : false;
   };
 
-  console.log(formFields);
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const isPasswordValid = validatePassword(password, confirmPassword);
-    
-    if(isPasswordValid === false) return 
-    
-    try{
-     const {user} = await createAuthUserWithEmailAndPassword(email,password)
-     await createUserDocumentFromAuth(user, {displayName})
 
-    }catch(err){
-        if(err.code === "auth/email-already-in-use"){
-            alert("email already in use")
-        }
+    if (isPasswordValid === false) return;
+
+    try {
+      const { user } = await createAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+      setCurrentUser(user);
+
+      await createUserDocumentFromAuth(user, { displayName });
+    } catch (err) {
+      if (err.code === "auth/email-already-in-use") {
+        alert("email already in use");
+      }
     }
-    
   };
 
   return (
     <div>
       <form onSubmit={handleFormSubmit} className="form">
-      <span style={{textTransform:"uppercase"}}>dont have an account ?</span>
+        <span style={{ textTransform: "uppercase" }}>
+          dont have an account ?
+        </span>
         <div className="form-item">
           <label>DisplayName:</label>
           <input

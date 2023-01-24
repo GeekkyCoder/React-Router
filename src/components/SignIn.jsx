@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 
 import {
   createUserDocumentFromAuth,
@@ -6,12 +6,15 @@ import {
   signInWithGooglePopUp,
 } from "../utils/firebase/utils";
 
+import { Context } from "./Context/Context";
+
 const formFieldsObject = {
   email: "",
   password: "",
 };
 
 function SignIn() {
+    const {setCurrentUser} = useContext(Context)
   const [formFields, setFormFields] = useState(formFieldsObject);
   const [isPasswordMatched, setIsPasswordMatched] = useState();
   const { email, password } = formFields;
@@ -29,11 +32,12 @@ function SignIn() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
+      const {user} = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
-      console.log(response);
+
+      setCurrentUser(user)
     } catch (err) {
       switch (err.code) {
         case "auth/wrong-password":

@@ -1,4 +1,4 @@
-import React, { useContext,useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { Context } from "./Context/Context";
@@ -13,26 +13,32 @@ import {
   signInWithGooglePopUp,
   createUserDocumentFromAuth,
   signInWithGoogleRedirect,
-  auth
+  signOutUser,
+  auth,
 } from ".././utils/firebase/utils";
 
 function Navigation() {
-  const { cartItems } = useContext(Context);
+  const { cartItems, currentUser, setCurrentUser } = useContext(Context);
+
+  const handleSignOut = async () => {
+    await signOutUser();
+    setCurrentUser(null);
+  };
 
   // const handleSignInWithGoogle = async () => {
   //   const { user } = await signInWithGooglePopUp();
   //   const userDocRef = await createUserDocumentFromAuth(user);
   // };
 
-// useEffect(()=> {
-//    const handleRedirect = async () => {
-//     const response = await getRedirectResult(auth)
-//    if(response){
-//     const userDocRef = await createUserDocumentFromAuth(response.user);
-//    }
-//    }
-//    handleRedirect()
-// },[])
+  // useEffect(()=> {
+  //    const handleRedirect = async () => {
+  //     const response = await getRedirectResult(auth)
+  //    if(response){
+  //     const userDocRef = await createUserDocumentFromAuth(response.user);
+  //    }
+  //    }
+  //    handleRedirect()
+  // },[])
 
   return (
     <div>
@@ -65,7 +71,11 @@ function Navigation() {
             </NavLink>
           </li>
           <li>
-           <NavLink to={"/auth"}>Sign up</NavLink>
+            {currentUser ? (
+              <span onClick={handleSignOut}>Sign Out</span>
+            ) : (
+              <NavLink to={"/auth"}>Sign up</NavLink>
+            )}
           </li>
         </ul>
       </div>
