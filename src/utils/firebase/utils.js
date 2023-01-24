@@ -4,6 +4,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithRedirect,
+  createUserWithEmailAndPassword
 } from "firebase/auth";
 
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
@@ -21,37 +22,51 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseStore = initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
 
-provider.setCustomParameters({
+googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
-
 export const auth = getAuth();
-export const signInWithGooglePopUp = () => signInWithPopup(auth, provider);
-export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
-export const db = getFirestore()
+export const signInWithGooglePopUp = () =>
+  signInWithPopup(auth, googleProvider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, googleProvider);
 
-export const createUserDocumentFromAuth = async (userAuth) => {
-  const userDocRef = doc(db,"users",userAuth.uid)
+export const db = getFirestore();
+
+export const createUserDocumentFromAuth = async (userAuth, additionalInformation) => {
+  if(!userAuth) return 
+
+  const userDocRef = doc(db, "users", userAuth.uid);
   // getDoc() gives an exists() method to check whether there is a document exist already or not!
-  const userSnapShot = await getDoc(userDocRef)
+  const userSnapShot = await getDoc(userDocRef);
 
-  if(!userSnapShot.exists()){
-    const {displayName,email} = userAuth
-    const createdAt = new Date()
-    try{
-      await setDoc(userDocRef,{
+  if (!userSnapShot.exists()) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+    try {
+      await setDoc(userDocRef, {
         displayName,
         email,
-        createdAt
-      })
-    }catch(err){
-        console.log(err)
+        createdAt,
+        ...additionalInformation
+      });
+    } catch (err) {
+     if(err.code === "auth/email-already-in-use"){
+       alert("email is already in use")
+     }else {
+      console.log(err)
+     }
     }
   }
 
-  return userDocRef
-}
+  return userDocRef;
+};
 
+export const createAuthUserWithEmailAndPassword = async (email,password) => {
+   if(!email || !password) return 
+
+   return await createUserWithEmailAndPassword(auth,email,password)
+}

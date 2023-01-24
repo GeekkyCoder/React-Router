@@ -84,3 +84,40 @@ body{
     margin-left: 1em;
 }
 
+.form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    border: 2px solid lightblue;
+    justify-content: space-between;
+    padding: 2em;
+    margin-top: 2em;
+}
+
+.form .form-item{
+    display: flex;
+    flex-direction: column;
+    margin: 1em 0;
+}
+
+input{
+    width: 70%;
+    font-family: inherit;
+    padding: .5em 1em;
+}
+
+button{
+    background-color: lightslategray;
+    border-radius: 10px;
+    padding: .5em ;
+    color: white;
+    font-family: inherit;
+    width: 70%;
+    outline: none;
+}
+
+button:hover{
+    cursor: pointer;
+}

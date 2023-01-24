@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-import {getRedirectResult} from "firebase/auth"
+// import {getRedirectResult} from "firebase/auth"
 
 import {
   signInWithGooglePopUp,
@@ -15,25 +15,24 @@ import {
   signInWithGoogleRedirect,
   auth
 } from ".././utils/firebase/utils";
-import { async } from "@firebase/util";
 
 function Navigation() {
   const { cartItems } = useContext(Context);
 
-  const handleSignInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopUp();
-    const userDocRef = await createUserDocumentFromAuth(user);
-  };
+  // const handleSignInWithGoogle = async () => {
+  //   const { user } = await signInWithGooglePopUp();
+  //   const userDocRef = await createUserDocumentFromAuth(user);
+  // };
 
-useEffect(()=> {
-   const handleRedirect = async () => {
-    const {user} = await getRedirectResult(auth)
-   if(user){
-    const userDocRef = await createUserDocumentFromAuth(user);
-   }
-   }
-   handleRedirect()
-},[])
+// useEffect(()=> {
+//    const handleRedirect = async () => {
+//     const response = await getRedirectResult(auth)
+//    if(response){
+//     const userDocRef = await createUserDocumentFromAuth(response.user);
+//    }
+//    }
+//    handleRedirect()
+// },[])
 
   return (
     <div>
@@ -66,14 +65,7 @@ useEffect(()=> {
             </NavLink>
           </li>
           <li>
-            <button onClick={handleSignInWithGoogle}>
-              Sign In With Google PopUp
-            </button>
-          </li>
-          <li>
-            <button onClick={signInWithGoogleRedirect}>
-              Sign In With Google Redirect
-            </button>
+           <NavLink to={"/signup"}>Sign up</NavLink>
           </li>
         </ul>
       </div>
