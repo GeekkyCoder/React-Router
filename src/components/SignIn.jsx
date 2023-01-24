@@ -29,14 +29,24 @@ function SignIn() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-        const response  = await signInAuthUserWithEmailAndPassword(email,password)
-        console.log(response)
+      const response = await signInAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+      console.log(response);
     } catch (err) {
-       if(err.message==="auth/wrong-password"){
-        alert('wrong password')
-       }else {
-        console.log(err)
-       }
+      switch (err.code) {
+        case "auth/wrong-password":
+          alert("wrong password");
+          break;
+
+        case "auth/user-not-found":
+          alert("no such user exists");
+          break;
+
+        default:
+          console.log(err.message);
+      }
     }
   };
 
