@@ -14,7 +14,6 @@ const formFieldsObject = {
 };
 
 function SignIn() {
-    const {setCurrentUser} = useContext(Context)
   const [formFields, setFormFields] = useState(formFieldsObject);
   const [isPasswordMatched, setIsPasswordMatched] = useState();
   const { email, password } = formFields;
@@ -37,7 +36,6 @@ function SignIn() {
         password
       );
 
-      setCurrentUser(user)
     } catch (err) {
       switch (err.code) {
         case "auth/wrong-password":
@@ -56,7 +54,6 @@ function SignIn() {
 
   const logUserWithGoogle = async () => {
     const { user } = await signInWithGooglePopUp();
-    await createUserDocumentFromAuth(user);
   };
 
   return (

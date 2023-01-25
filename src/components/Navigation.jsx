@@ -10,11 +10,11 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 // import {getRedirectResult} from "firebase/auth"
 
 import {
-  signInWithGooglePopUp,
-  createUserDocumentFromAuth,
-  signInWithGoogleRedirect,
+  // signInWithGooglePopUp,
+  // createUserDocumentFromAuth,
+  // signInWithGoogleRedirect,
   signOutUser,
-  auth,
+  // auth,
 } from ".././utils/firebase/utils";
 
 function Navigation() {
@@ -22,7 +22,6 @@ function Navigation() {
 
   const handleSignOut = async () => {
     await signOutUser();
-    setCurrentUser(null);
   };
 
   // const handleSignInWithGoogle = async () => {

@@ -46,7 +46,6 @@ function SignUp() {
         email,
         password
       );
-      setCurrentUser(user);
 
       await createUserDocumentFromAuth(user, { displayName });
     } catch (err) {
